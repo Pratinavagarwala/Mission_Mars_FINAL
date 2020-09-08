@@ -1,0 +1,8 @@
+class Jeep{
+    constructor(){
+
+    }
+    display(){
+        
+    }
+}

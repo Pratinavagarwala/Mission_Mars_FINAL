@@ -1,10 +1,12 @@
+var form;
 var mars;
 var rocket,rocket_img;
 var satelliteImg, asteroidImg,satellitesGroup,asteroidGroup;
 var building,building_img,bg;
 var gameState="start";
+var gamePosition="start";
 var distance=0;
-var desert;
+var desert,desertImg;
 
 
 function preload(){
@@ -13,27 +15,39 @@ function preload(){
   bg=loadImage("images/bg.png");
   satelliteImg=loadImage("images/satellite.png");
   asteroidImg=loadImage("images/meteor.png");
+  desertImg=loadImage("images/Desert.png");
 }
 function setup() {
-  createCanvas(400,800);
+ 
+  createCanvas(1000,900);
+  form=new Form();
+  
   rocket=createSprite(200,700,30,80);
   rocket.addImage(rocket_img);
   satellitesGroup=new Group();
   asteroidGroup=new Group();
   building=createSprite(200,700,100,200);
   building.addImage(building_img);
-  
+  desert=createSprite(0,500,1000,900);
+  desert.addImage(desertImg);
 } 
+
 function draw() {
-  background("navy"); 
+  //background("white"); 
+  image(desert,0,0);
+if(gameState==="start"){
+  form.display();
+  
+}else if(gameState==="play"){
+  form.hide();
   if(mousePressedOver(building)){
-    gameState="playEarth";
+    gamePosition="playEarth";
     rocket.y=500;
     building.velocityY=5;
     building.lifetime=100;
   }
   
-  if (gameState==="playEarth"){
+  if (gamePosition==="playEarth"){
     rocket.x=mouseX;
      spawnAsteroids();
     distance=Math.round(frameCount/5);
@@ -41,7 +55,7 @@ function draw() {
   }
   console.log(distance);
   if(distance>100){
-    background("black");
+    //background("black");
   }
   
   if(distance>100 && distance<150){
@@ -54,18 +68,24 @@ function draw() {
   }
   
 if(keyDown(UP_ARROW)){
-  rocket.velocityY=rocket.velocityY-5;
+  rocket.velocityY=rocket.velocityY-2;
 }
 if(keyDown(DOWN_ARROW)){
-  rocket.velocityY=rocket.velocityY+5;
+  rocket.velocityY=rocket.velocityY+2;
 }
 console.log(rocket.velocityY);
-  
+if(asteroidGroup.isTouching(rocket)){
+  rocket.destoyEach();
+}
+if(satellitesGroup.isTouching(rocket)){
+  rocket.destoyEach();
+}
+
   
  
   drawSprites();
 }
-
+}
 
 function spawnSatellites(){
   if(frameCount%84===0){
@@ -85,3 +105,6 @@ function spawnAsteroids(){
     asteroids.lifetime=200;
   }
 }
+
+
+  
