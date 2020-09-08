@@ -1,24 +1,27 @@
 var mars;
-var rocket,rocket_img,satellitesGroup,asteroidGroup;
-var building,building_img;
+var rocket,rocket_img;
+var satelliteImg, asteroidImg,satellitesGroup,asteroidGroup;
+var building,building_img,bg;
 var gameState="start";
 var distance=0;
 var desert;
 
 
-function Preload(){
-
- 
+function preload(){
+  rocket_img=loadImage("images/Rocket.png");
+  building_img=loadImage("images/building.png");
+  bg=loadImage("images/bg.png");
+  satelliteImg=loadImage("images/satellite.png");
+  asteroidImg=loadImage("images/meteor.png");
 }
 function setup() {
   createCanvas(400,800);
   rocket=createSprite(200,700,30,80);
-  rocket.shapeColor="white";
-  rocket.scale=0.5;
+  rocket.addImage(rocket_img);
   satellitesGroup=new Group();
   asteroidGroup=new Group();
   building=createSprite(200,700,100,200);
-  building.shapeColor="white";
+  building.addImage(building_img);
   
 } 
 function draw() {
@@ -67,7 +70,7 @@ console.log(rocket.velocityY);
 function spawnSatellites(){
   if(frameCount%84===0){
     var satellites=createSprite(100,0,10,10);
-    satellites.shapeColor="Green";
+    satellites.addImage(satelliteImg)
     satellites.velocityY=5;
     satellites.x=random(10,390);
     satellites.lifetime=200;
@@ -76,11 +79,9 @@ function spawnSatellites(){
 function spawnAsteroids(){
   if(frameCount%84===0){
     var asteroids =createSprite(100,0,10,10);
-    asteroids.shapeColor="Brown";
+    asteroids.addImage(asteroidImg)
     asteroids.velocityY=5;
     asteroids.x=random(10,390);
     asteroids.lifetime=200;
   }
 }
-
-
