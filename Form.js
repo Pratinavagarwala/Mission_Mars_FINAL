@@ -1,16 +1,16 @@
 class Form{
     constructor(){
-        this.buttom=createButton("Proceed to launching ground");
+        this.button=createButton("Proceed to launching ground");
     }
     hide(){
-        this.buttom.hide();
+        this.button.hide();
     }
 
     display(){
-        this.buttom.position(100,100);
-        this.buttom.mousePressed(()=>{
-            this.buttom.hide();
+        this.button.position(100,100);
+        this.button.mousePressed(()=>{
+            this.button.hide();
             gameState="play";
-        })
+        });
     }
 }
