@@ -28,7 +28,14 @@ class Game{
         
             
         }
-        
+        if(rocket.isTouching(asteroidGroup)){
+          damage=damage+25;
+          asteroidGroup.destroyEach();
+        }
+        if(rocket.isTouching(satellitesGroup)){
+          damage=damage+50;
+          satellitesGroup.destroyEach();
+        }
            
         if(gamePosition==="playEarth"){
             rocket.x=mouseX;
@@ -37,20 +44,23 @@ class Game{
            if(distance>2500){
             gamePosition="playSky" 
            }
-        }
+          }  
+      
  if(gamePosition==="playSky"){
-     background("black"){
+     background("black")
          desert.destroy();
-     }
-  if(distance>100 && distance<150){
+     
+    }
+     
+  if(distance>200 && distance<350){
     
     spawnSatellites();
   }
-  if(distance>80 && distance<100){
+  if(distance>80 && distance<150){
     
     spawnAsteroids();
   }
-  
+  /*
 if(keyDown(UP_ARROW)){
   rocket.velocityY=rocket.velocityY-2;
 }
@@ -68,6 +78,10 @@ if(satellitesGroup.isTouching(rocket)){
   
  
   drawSprites();
-}
+  strokeWeight(4);
+        stroke("White");
+        textSize(20);
+        text("Damage:"+damage,500,70);
+    }
     
 }
