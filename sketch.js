@@ -19,6 +19,7 @@ function preload(){
   asteroidImg=loadImage("images/meteor.png");
   desertImg=loadImage("images/Desert.png");
   city=loadImage("images/bg1.jpg");
+  mars=loadImage("images/Mars.jpg");
 }
 function setup() {
  
@@ -39,6 +40,9 @@ function draw() {
     clear();
     background("black");
     game.play();
+  }
+  if(gameState==="end"){
+    game.end();
   }
 }
 function spawnSatellites(){
